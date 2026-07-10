@@ -16,6 +16,8 @@ namespace Overdrunk
             }
 
             Instance = this;
+
+            DontDestroyOnLoad(gameObject);
         }
     }
 }
