@@ -9,7 +9,7 @@ namespace Overdrunk.Player
     {
         private Rigidbody _rb;
 
-        public float Speed = 10f;
+        [field: SerializeField] public float Speed { get; set; } = 10f;
 
         private Vector2 _moveInput;
         private PlayerCharacterInputActions _inputAction;
@@ -44,7 +44,7 @@ namespace Overdrunk.Player
         private void FixedUpdate()
         {
             Vector3 _moveInput3 = new Vector3(_moveInput.x, _rb.linearVelocity.y, _moveInput.y);
-            _rb.linearVelocity = _moveInput3 * Speed;
+            _rb.linearVelocity = _moveInput3.normalized * Speed;
         }
 
     }
