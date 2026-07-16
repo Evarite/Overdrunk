@@ -1,36 +1,34 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Overdrunk.Vehicle
+namespace Overdrunk.Player
 {
-    [AddComponentMenu("Overdrunk/Vehicle/Vehicle Movement Controls")]
+    [AddComponentMenu("Overdrunk/Player/Player Movement Controls")]
     [RequireComponent(typeof(Rigidbody))]
-    public class VehicleMovementControls : MonoBehaviour
+    public class PlayerMovementControls : MonoBehaviour
     {
         private Rigidbody _rb;
 
-        [Header("Move speed")]
-        [SerializeField]
-        private float _speed = 10f;
-        public float Speed { get => _speed; set => _speed = value; }
+        [field: SerializeField] public float Speed { get; set; } = 10f;
+
         private Vector2 _moveInput;
 
         private void Awake() => _rb = GetComponent<Rigidbody>();
 
         private void OnEnable()
         {
-            GameManager.Instance.InputActions.Vehicle.Move.performed += MovePerformed;
-            GameManager.Instance.InputActions.Vehicle.Move.canceled += MovePerformed;
+            GameManager.Instance.InputActions.Player.Move.performed += MovePerformed;
+            GameManager.Instance.InputActions.Player.Move.canceled += MovePerformed;
+
         }
         private void OnDisable()
         {
-            GameManager.Instance.InputActions.Vehicle.Move.performed -= MovePerformed;
-            GameManager.Instance.InputActions.Vehicle.Move.canceled -= MovePerformed;
+            GameManager.Instance.InputActions.Player.Move.performed -= MovePerformed;
+            GameManager.Instance.InputActions.Player.Move.canceled -= MovePerformed;
         }
 
         private void MovePerformed(InputAction.CallbackContext obj) =>
             _moveInput = obj.ReadValue<Vector2>();
-
 
         private void FixedUpdate()
         {
@@ -42,6 +40,5 @@ namespace Overdrunk.Vehicle
                 normalizedInput.y
             );
         }
-
     }
 }
