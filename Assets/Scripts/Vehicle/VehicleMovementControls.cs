@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Overdrunk.Vehicle
 {
-    [AddComponentMenu("Overdrunk/Vehicle/Vehicle Controller")]
+    [AddComponentMenu("Overdrunk/Vehicle/Vehicle Movement Controls")]
     [RequireComponent(typeof(Rigidbody))]
     public class VehicleMovementControls : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace Overdrunk.Vehicle
         [Header("Move speed")]
         [SerializeField]
         private float _speed = 10f;
-        public float Speed{get => _speed;set => _speed = value;}
+        public float Speed { get => _speed; set => _speed = value; }
         private Vector2 _moveInput;
         private InputActions _inputAction;
 
@@ -45,12 +45,11 @@ namespace Overdrunk.Vehicle
 
         private void FixedUpdate()
         {
-
-            Vector2 _normalizedInput = Speed* Vector2.ClampMagnitude(_moveInput, 1f);
+            Vector2 _normalizedInput = Speed * Vector2.ClampMagnitude(_moveInput, 1f);
 
             _rb.linearVelocity = new Vector3(
-                _normalizedInput.x, 
-                _rb.linearVelocity.y, 
+                _normalizedInput.x,
+                _rb.linearVelocity.y,
                 _normalizedInput.y
             );
         }
