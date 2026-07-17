@@ -1,7 +1,8 @@
+using UnityEngine;
 namespace Overdrunk.Items
 {
     public interface IPickable
     {
-        void PickUp() { }
+        void PickUp(Transform transformTo) { }
     }
 }
