@@ -19,7 +19,6 @@ namespace Overdrunk.Player
         {
             GameManager.Instance.InputActions.Player.Move.performed += MovePerformed;
             GameManager.Instance.InputActions.Player.Move.canceled += MovePerformed;
-
         }
         private void OnDisable()
         {
