@@ -1,46 +1,24 @@
 using UnityEngine;
-namespace Overdrunk.Items
+namespace Overdrunk.Items.Interfaces
 {
     [AddComponentMenu("Overdrunk/Items/Pickable Item")]
     public class PickableItem : MonoBehaviour, IPickable
     {
         private Rigidbody _rb;
-        private bool _isPickedUp;
+        private bool _isPickedUp = false;
         private Transform _handTransform;
 
-        void Awake()
-        {
-            _rb=GetComponent<Rigidbody>();
-        }
+        void Awake() => _rb = GetComponent<Rigidbody>();
+        
+        public void PickUp(Transform transformTo) {
 
-        void Start()
-        {
-            _isPickedUp=false;
-        }
-
-        void IPickable.PickUp(Transform transformTo) {
-
-            if (TryGetComponent<Rigidbody>(out _rb))
-            {
-                _rb.isKinematic = true;
-            }
+            if (_rb != null) _rb.isKinematic = true;
 
             _isPickedUp = true;
-            _handTransform = transformTo;
-            transform.position = _handTransform.position;
-            transform.rotation = _handTransform.rotation;
+
+            transform.SetParent(transformTo);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
         }
-
-        void LateUpdate()
-        {
-            if (!_isPickedUp) return; 
-
-            transform.position = _handTransform.position;
-            transform.rotation = _handTransform.rotation;
-        }
-
-        
-
-
     }
 }

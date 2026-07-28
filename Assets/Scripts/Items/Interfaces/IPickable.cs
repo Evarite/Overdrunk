@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Overdrunk.Items
+namespace Overdrunk.Items.Interfaces
 {
     public interface IPickable
     {
